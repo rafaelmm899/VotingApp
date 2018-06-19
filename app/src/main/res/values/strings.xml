@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">VotingApp</string>
+
+    <string name="username_loginactivity">Usuario</string>
+    <string name="password_loginactivity">Contraseña</string>
+    <string name="textButton_loginactivity">Entrar</string>
+    <string name="invalidUsernameOrPassword">Usuario o Contraseña invalida</string>
+    <string name="requiredFields">Los campos son obligatorios</string>
+    <string name="authenticationError">Error de autenticacion por favor intente nuevamente</string>
+    <string name="userLoggedIn">Usuario logueado satisfactoriamente</string>
+    <string name="errorUserObjectIsNull">Error en el servidor</string>
+
 </resources>
