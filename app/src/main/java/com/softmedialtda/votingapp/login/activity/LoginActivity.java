@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.softmedialtda.votingapp.R;
+import com.softmedialtda.votingapp.dashboard.activity.DashboardActivity;
 import com.softmedialtda.votingapp.login.domain.User;
 
 import org.json.JSONException;
@@ -38,6 +39,9 @@ public class LoginActivity extends Activity implements OnClickListener {
             showMessage(getResources().getString(R.string.errorUserObjectIsNull),getBaseContext());
         }else{
             showMessage(getResources().getString(R.string.userLoggedIn),getBaseContext());
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            intent.putExtra("user",user);
+            startActivity(intent);
         }
 
     }

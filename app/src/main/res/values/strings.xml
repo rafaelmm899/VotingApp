@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">VotingApp</string>
 
+    <!-- login view -->
     <string name="username_loginactivity">Usuario</string>
     <string name="password_loginactivity">Contraseña</string>
     <string name="textButton_loginactivity">Entrar</string>
@@ -10,4 +11,14 @@
     <string name="userLoggedIn">Usuario logueado satisfactoriamente</string>
     <string name="errorUserObjectIsNull">Error en el servidor</string>
 
+    <!-- activity_dashboard view -->
+    <string name="voting_textview">Votaciones</string>
+    <string name="voting_info">Verifique las actividades en las votaciones</string>
+    <string name="campaign_textview">Campañas</string>
+    <string name="campaign_info">Mira las propuestas de los candidatos</string>
+    <string name="stadistics_textview">Estadisticas</string>
+    <string name="stadistics_info">Examina como van las votaciones</string>
+    <string name="others_textview">Otros</string>
+    <string name="others_info">Seccion por definir</string>
+    <string name="vote_textview">Votar</string>
 </resources>
