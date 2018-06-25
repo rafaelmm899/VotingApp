@@ -21,4 +21,8 @@
     <string name="others_textview">Otros</string>
     <string name="others_info">Seccion por definir</string>
     <string name="vote_textview">Votar</string>
+
+    <!-- Voting View -->
+    <string name="action_search">Buscar</string>
+    <string name="search_hint">Escriba el nombre..</string>
 </resources>
