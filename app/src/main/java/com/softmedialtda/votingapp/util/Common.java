@@ -1,12 +1,17 @@
 package com.softmedialtda.votingapp.util;
 
 import android.content.Context;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.softmedialtda.votingapp.login.domain.User;
+import com.softmedialtda.votingapp.voting.domain.Candidate;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Agustin on 18/6/2018.
@@ -36,6 +41,19 @@ public class Common {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public static ArrayList<Candidate> getListCandidate(JSONArray json){
+        ArrayList<Candidate> list = new ArrayList<Candidate>();
+        try {
+            for (int i = 0; i < json.length(); i++){
+                JSONObject data = json.getJSONObject(i);
+                list.add(new Candidate(data.getString("NOMBRE"),data.getString("GRADO"),data.getString("GRUPO"),data.getString("IMAGE")));
+            }
+        }catch (JSONException ex){
+            ex.printStackTrace();
+        }
+        return list;
     }
 
 }

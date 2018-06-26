@@ -101,14 +101,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (!usernameEditText.getText().toString().trim().equals("")&&!passwordEditText.getText().toString().trim().equals("")) {
+        //if (!usernameEditText.getText().toString().trim().equals("")&&!passwordEditText.getText().toString().trim().equals("")) {
             switch (v.getId()) {
                 case R.id.enterLogin:
-                    username = usernameEditText.getText().toString().toUpperCase();
-                    password = passwordEditText.getText().toString();
+                    //username = usernameEditText.getText().toString().toUpperCase();
+                    //password = passwordEditText.getText().toString();
+                    username = "BRACHOEMIL@GMAIL.COM";
+                    password = "sistemas_157916";
                     new LoginAsyncTask().execute(url);
                     break;
             }
-        }
+        //}
     }
 }

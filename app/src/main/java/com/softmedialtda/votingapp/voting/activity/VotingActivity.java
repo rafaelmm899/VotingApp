@@ -1,25 +1,110 @@
 package com.softmedialtda.votingapp.voting.activity;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import com.softmedialtda.votingapp.*;
+import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
+import android.support.v7.widget.Toolbar;
 
-public class VotingActivity extends AppCompatActivity implements CandidateAdapter.ContactsAdapterListener {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import static com.softmedialtda.votingapp.util.Common.getListCandidate;
+import static com.softmedialtda.votingapp.util.Connection.sendPost;
+import static com.softmedialtda.votingapp.util.Constants.DOMAIN;
+
+public class VotingActivity extends AppCompatActivity implements CandidateAdapter.CandidateAdapterListener {
     private SearchView searchView;
+    String url = DOMAIN+"candidate";
+    User user;
+    public static CandidateAdapter.CandidateAdapterListener mContext;
+    public  static Context context;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting);
+
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+
+        // toolbar fancy stuff
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setTitle(R.string.candidate_toolbar_title);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
+
+
+        user = (User) getIntent().getSerializableExtra("user");
+        context = this;
+        mContext = this;
+        new HttpAsyncTask().execute(url);
+    }
+
+
+    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+
+
+        /*public HttpAsyncTask(Context context){
+            mContext = context;
+        }*/
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if (!s.equals("")){
+                try{
+                    JSONArray response = new JSONArray(s);
+                    ArrayList<Candidate> list = getListCandidate(response);
+                    if (list.size() == 0){
+
+                    }else{
+                        CandidateAdapter adapter = new CandidateAdapter(context,list,mContext);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            JSONObject paramaters = new JSONObject();
+            try {
+                paramaters.accumulate("ID_INSTITUCION", user.getIdInstitution());
+            }catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return sendPost(url,paramaters);
+        }
     }
 
     @Override
