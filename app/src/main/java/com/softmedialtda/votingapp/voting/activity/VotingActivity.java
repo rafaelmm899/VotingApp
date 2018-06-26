@@ -65,12 +65,6 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
 
 
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-
-
-        /*public HttpAsyncTask(Context context){
-            mContext = context;
-        }*/
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

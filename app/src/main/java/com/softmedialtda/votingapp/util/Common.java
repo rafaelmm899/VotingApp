@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
 
@@ -54,6 +55,18 @@ public class Common {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public static Voting getCurrentVotes(JSONObject json){
+        Voting object = new Voting();
+        try {
+            object.setId(Integer.parseInt(json.getString("ID")));
+            object.setName(json.getString("NOMBRE"));
+            object.setIdInstitution(Integer.parseInt(json.getString("ID_INSTITUCION")));
+        }catch (JSONException ex){
+            ex.printStackTrace();
+        }
+        return object;
     }
 
 }
