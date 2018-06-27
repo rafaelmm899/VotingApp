@@ -42,13 +42,19 @@ public class DashboardActivity extends AppCompatActivity {
         votingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, VotingActivity.class);
-                intent.putExtra("user",user);
-                intent.putExtra("voting",voting);
-                startActivity(intent);
+                clickListener();
             }
         });
     }
+
+    private void clickListener (){
+        Intent intent = new Intent(DashboardActivity.this, VotingActivity.class);
+        intent.putExtra("user",user);
+        intent.putExtra("voting",voting);
+        startActivity(intent);
+    }
+
+
 
     private class HttpVotingAsyncTask extends AsyncTask<String, Void, String>{
         @Override
@@ -74,6 +80,7 @@ public class DashboardActivity extends AppCompatActivity {
             JSONObject paramaters = new JSONObject();
             try {
                 paramaters.accumulate("ID_INSTITUCION", user.getIdInstitution());
+                paramaters.accumulate("IDALUMNO", user.getId());
             }catch (JSONException e) {
                 e.printStackTrace();
             }

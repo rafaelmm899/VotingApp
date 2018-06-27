@@ -37,6 +37,7 @@ import static com.softmedialtda.votingapp.util.Constants.DOMAIN;
 public class VotingActivity extends AppCompatActivity implements CandidateAdapter.CandidateAdapterListener {
     private SearchView searchView;
     String url = DOMAIN+"candidate";
+    String urlVote = DOMAIN+"vote";
     User user;
     Voting voting;
     public static CandidateAdapter.CandidateAdapterListener mContext;
@@ -163,7 +164,13 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
 
         @Override
         protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+            if (!s.equals("")){
+                if (s.equals("1")){
+                    new AlertDialog.Builder(context).setTitle(R.string.votoCast).setNeutralButton(R.string.ok,null).show();
+                }else{
+                    new AlertDialog.Builder(context).setTitle(R.string.error).setNeutralButton(R.string.ok,null).show();
+                }
+            }
         }
 
         @Override
@@ -174,10 +181,12 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
                 try {
                     paramaters.accumulate("IDVOTING", voting.getId());
                     paramaters.accumulate("IDCANDIDATE", idCandidate);
+                    paramaters.accumulate("IDALUMNO", user.getId());
+                    paramaters.accumulate("IDINSTITUCION", user.getIdInstitution());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                return sendPost(url, paramaters);
+                return sendPost(urlVote, paramaters);
             }else{
                 return null;
             }
@@ -187,7 +196,11 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
 
     @Override
     public void onCandidateSelected(Candidate candidate){
-        confirmDialog(candidate);
+        if (voting.getUserVoted() == 1){
+            new AlertDialog.Builder(context).setTitle(R.string.userHasAlreadyVoted).setNeutralButton(R.string.ok,null).show();
+        }else{
+            confirmDialog(candidate);
+        }
     }
 
 }

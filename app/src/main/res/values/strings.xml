@@ -30,4 +30,8 @@
     <string name="questionVote">Quieres votar por este candidato?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="error">Error</string>
+    <string name="ok">Ok</string>
+    <string name="votoCast">Voto realizado</string>
+    <string name="userHasAlreadyVoted">Ya usted ha votado</string>
 </resources>
