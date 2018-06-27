@@ -1,5 +1,6 @@
 package com.softmedialtda.votingapp.voting.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import com.softmedialtda.votingapp.*;
+import com.softmedialtda.votingapp.dashboard.activity.DashboardActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
@@ -43,6 +45,7 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
     public static CandidateAdapter.CandidateAdapterListener mContext;
     public  static Context context;
     private RecyclerView recyclerView;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,11 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(VotingActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage(getResources().getString(R.string.pleaseWhait));
+            progressDialog.show();
         }
 
         @Override
@@ -93,6 +101,7 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
                     e.printStackTrace();
                 }
             }
+            progressDialog.hide();
         }
 
         @Override

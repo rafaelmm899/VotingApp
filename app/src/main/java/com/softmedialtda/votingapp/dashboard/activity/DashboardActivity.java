@@ -1,5 +1,6 @@
 package com.softmedialtda.votingapp.dashboard.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
     User user;
     String url = DOMAIN+"voting";
     Voting voting;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +62,11 @@ public class DashboardActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(DashboardActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage(getResources().getString(R.string.pleaseWhait));
+            progressDialog.show();
         }
 
         @Override
@@ -73,6 +80,7 @@ public class DashboardActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+            progressDialog.hide();
         }
 
         @Override

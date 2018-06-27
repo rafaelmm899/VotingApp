@@ -10,6 +10,7 @@
     <string name="authenticationError">Error de autenticacion por favor intente nuevamente</string>
     <string name="userLoggedIn">Usuario logueado satisfactoriamente</string>
     <string name="errorUserObjectIsNull">Error en el servidor</string>
+    <string name="Authenticating">Autenticando</string>
 
     <!-- activity_dashboard view -->
     <string name="voting_textview">Votaciones</string>
@@ -34,4 +35,5 @@
     <string name="ok">Ok</string>
     <string name="votoCast">Voto realizado</string>
     <string name="userHasAlreadyVoted">Ya usted ha votado</string>
+    <string name="pleaseWhait">Por favor espere..</string>
 </resources>

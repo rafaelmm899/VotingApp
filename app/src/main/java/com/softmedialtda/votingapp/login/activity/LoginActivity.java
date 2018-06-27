@@ -1,6 +1,7 @@
 package com.softmedialtda.votingapp.login.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 
@@ -24,6 +25,7 @@ public class LoginActivity extends Activity implements OnClickListener {
     String url = DOMAIN+"login";
     String username, password;
     EditText usernameEditText,passwordEditText;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         User user = convertJsonObjectToUserObject(response);
         if (user.getId() == 0){
             showMessage(getResources().getString(R.string.errorUserObjectIsNull),getBaseContext());
+            progressDialog.hide();
         }else{
             showMessage(getResources().getString(R.string.userLoggedIn),getBaseContext());
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
@@ -50,6 +53,11 @@ public class LoginActivity extends Activity implements OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(LoginActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage(getResources().getString(R.string.Authenticating));
+            progressDialog.show();
         }
 
         @Override
@@ -66,23 +74,23 @@ public class LoginActivity extends Activity implements OnClickListener {
                                 break;
                             case "3":
                                 showMessage(getResources().getString(R.string.invalidUsernameOrPassword),getBaseContext());
-
+                                progressDialog.hide();
                                 break;
                             case "4":
                                 showMessage(getResources().getString(R.string.requiredFields),getBaseContext());
-
+                                progressDialog.hide();
                                 break;
                         }
                     }else{
                         showMessage(getResources().getString(R.string.authenticationError),getBaseContext());
-
+                        progressDialog.hide();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }else{
                 showMessage(getResources().getString(R.string.authenticationError),getBaseContext());
-
+                progressDialog.hide();
             }
         }
 
