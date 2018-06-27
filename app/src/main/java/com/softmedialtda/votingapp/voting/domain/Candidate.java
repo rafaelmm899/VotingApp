@@ -9,15 +9,25 @@ public class Candidate {
     String grade;
     String group;
     String image;
+    int id;
 
     public Candidate() {
     }
 
-    public Candidate(String name, String grade, String group, String image) {
+    public Candidate(String name, String grade, String group, String image, int id) {
         this.name = name;
         this.grade = grade;
         this.group = group;
         this.image = image;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

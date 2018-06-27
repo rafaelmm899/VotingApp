@@ -48,7 +48,7 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.MyVi
                 @Override
                 public void onClick(View view) {
                     // send selected contact in callback
-                    listener.onContactSelected(candidateListFiltered.get(getAdapterPosition()));
+                    listener.onCandidateSelected(candidateListFiltered.get(getAdapterPosition()));
                 }
             });
         }
@@ -136,6 +136,6 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.MyVi
     }
 
     public interface CandidateAdapterListener {
-        void onContactSelected(Candidate contact);
+        void onCandidateSelected(Candidate contact);
     }
 }

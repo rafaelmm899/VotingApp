@@ -44,6 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, VotingActivity.class);
                 intent.putExtra("user",user);
+                intent.putExtra("voting",voting);
                 startActivity(intent);
             }
         });

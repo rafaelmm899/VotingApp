@@ -49,7 +49,7 @@ public class Common {
         try {
             for (int i = 0; i < json.length(); i++){
                 JSONObject data = json.getJSONObject(i);
-                list.add(new Candidate(data.getString("NOMBRE"),data.getString("GRADO"),data.getString("GRUPO"),data.getString("IMAGE")));
+                list.add(new Candidate(data.getString("NOMBRE"),data.getString("GRADO"),data.getString("GRUPO"),data.getString("IMAGE"),Integer.parseInt(data.getString("ID"))));
             }
         }catch (JSONException ex){
             ex.printStackTrace();

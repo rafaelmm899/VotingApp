@@ -26,4 +26,8 @@
     <string name="action_search">Buscar</string>
     <string name="search_hint">Escriba el nombre..</string>
     <string name="candidate_toolbar_title">Candidatos</string>
+    <string name="candidate_vote">Votar</string>
+    <string name="questionVote">Quieres votar por este candidato?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
 </resources>

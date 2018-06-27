@@ -34,4 +34,6 @@
         android:textColor="@color/candidate_number"
         android:textSize="@dimen/contact_number" />
 
+
+
 </RelativeLayout>

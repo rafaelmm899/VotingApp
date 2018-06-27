@@ -1,10 +1,12 @@
 package com.softmedialtda.votingapp.dashboard.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by Agustin on 26/6/2018.
  */
 
-public class Voting {
+public class Voting implements Serializable {
     int id;
     String name;
     int idInstitution;

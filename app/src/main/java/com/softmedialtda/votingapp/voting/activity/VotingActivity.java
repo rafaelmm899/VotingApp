@@ -1,9 +1,11 @@
 package com.softmedialtda.votingapp.voting.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import com.softmedialtda.votingapp.*;
+import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +38,7 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
     private SearchView searchView;
     String url = DOMAIN+"candidate";
     User user;
+    Voting voting;
     public static CandidateAdapter.CandidateAdapterListener mContext;
     public  static Context context;
     private RecyclerView recyclerView;
@@ -58,6 +62,7 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
 
 
         user = (User) getIntent().getSerializableExtra("user");
+        voting = (Voting) getIntent().getSerializableExtra("voting");
         context = this;
         mContext = this;
         new HttpAsyncTask().execute(url);
@@ -135,9 +140,54 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         }
     }
 
+    private void confirmDialog(final Candidate candidate){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(R.string.questionVote).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new HttpVoteAsyncTask().execute(String.valueOf(candidate.getId()));
+            }
+        }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
+    }
+
+    private class HttpVoteAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            JSONObject paramaters = new JSONObject();
+            String idCandidate = params[0];
+            if (!idCandidate.equals("")) { //TODO: VERIFICAR ESTO
+                try {
+                    paramaters.accumulate("IDVOTING", voting.getId());
+                    paramaters.accumulate("IDCANDIDATE", idCandidate);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return sendPost(url, paramaters);
+            }else{
+                return null;
+            }
+
+        }
+    }
+
     @Override
-    public void onContactSelected(Candidate candidate){
-        Toast.makeText(getApplicationContext(),"Selected" + candidate.getName(),Toast.LENGTH_LONG).show();
+    public void onCandidateSelected(Candidate candidate){
+        confirmDialog(candidate);
     }
 
 }
