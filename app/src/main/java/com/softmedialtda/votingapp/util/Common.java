@@ -62,7 +62,7 @@ public class Common {
         try {
             object.setId(Integer.parseInt(json.getString("ID")));
             object.setName(json.getString("NOMBRE"));
-            object.setIdInstitution(Integer.parseInt(json.getString("ID_INSTITUCION")));
+            object.setIdInstitution(Integer.parseInt(json.getString("IDINSTITUCION")));
         }catch (JSONException ex){
             ex.printStackTrace();
         }

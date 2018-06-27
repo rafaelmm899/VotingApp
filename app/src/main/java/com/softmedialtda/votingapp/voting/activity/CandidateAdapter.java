@@ -1,6 +1,8 @@
 package com.softmedialtda.votingapp.voting.activity;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.widget.Filterable;
@@ -15,6 +17,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.softmedialtda.votingapp.R;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,10 +76,23 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.MyVi
         holder.name.setText(candidate.getName());
         holder.grade.setText(candidate.getGrade());
 
-        Glide.with(context)
+        if (candidate.getImage().equals("")){
+            holder.thumbnail.setImageResource(R.mipmap.photodefault);
+        }else{
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(candidate.getImage()).getContent());
+                holder.thumbnail.setImageBitmap(bitmap);
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        /*Glide.with(context)
                 .load(candidate.getImage())
                 .apply(RequestOptions.circleCropTransform())
-                .into(holder.thumbnail);
+                .into(holder.thumbnail);*/
     }
 
     @Override

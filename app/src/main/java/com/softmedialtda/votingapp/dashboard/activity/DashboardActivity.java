@@ -36,6 +36,8 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         user = (User) getIntent().getSerializableExtra("user");
+        new HttpVotingAsyncTask().execute(url);
+
         LinearLayout votingButton = (LinearLayout) findViewById(R.id.votingButton);
         votingButton.setOnClickListener(new View.OnClickListener() {
             @Override
