@@ -23,9 +23,11 @@
         </activity>
         <activity android:name=".dashboard.activity.DashboardActivity" />
         <activity android:name=".voting.activity.VotingActivity">
-            <meta-data android:name="android.app.candidate_searchable"
-                android:resource="@xml/candidate_searchable"/>
+            <meta-data
+                android:name="android.app.candidate_searchable"
+                android:resource="@xml/candidate_searchable" />
         </activity>
+        <activity android:name=".campaign.activity.CampaignActivity"></activity>
     </application>
 
 </manifest>

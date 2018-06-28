@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.softmedialtda.votingapp.R;
+import com.softmedialtda.votingapp.campaign.activity.CampaignActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.activity.LoginActivity;
 import com.softmedialtda.votingapp.login.domain.User;
@@ -44,16 +45,25 @@ public class DashboardActivity extends AppCompatActivity {
         votingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickListener();
+                clickListener(v);
             }
         });
     }
 
-    private void clickListener (){
-        Intent intent = new Intent(DashboardActivity.this, VotingActivity.class);
-        intent.putExtra("user",user);
-        intent.putExtra("voting",voting);
-        startActivity(intent);
+    private void clickListener (View v){
+        switch (v.getId()){
+            case R.id.votingButton:
+                Intent intentVoting = new Intent(DashboardActivity.this, VotingActivity.class);
+                intentVoting.putExtra("user",user);
+                intentVoting.putExtra("voting",voting);
+                startActivity(intentVoting);
+                break;
+            case R.id.campaignButton:
+                Intent intentCampaign = new Intent(DashboardActivity.this, CampaignActivity.class);
+                startActivity(intentCampaign);
+                break;
+        }
+
     }
 
 
