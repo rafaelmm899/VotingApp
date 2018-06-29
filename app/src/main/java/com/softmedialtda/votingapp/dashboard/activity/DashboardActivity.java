@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -48,6 +49,14 @@ public class DashboardActivity extends AppCompatActivity {
                 clickListener(v);
             }
         });
+
+        LinearLayout campaignButton = (LinearLayout) findViewById(R.id.campaignButton);
+        campaignButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener(v);
+            }
+        });
     }
 
     private void clickListener (View v){
@@ -60,6 +69,8 @@ public class DashboardActivity extends AppCompatActivity {
                 break;
             case R.id.campaignButton:
                 Intent intentCampaign = new Intent(DashboardActivity.this, CampaignActivity.class);
+                Log.e("algo","algo");
+                intentCampaign.putExtra("voting",voting);
                 startActivity(intentCampaign);
                 break;
         }

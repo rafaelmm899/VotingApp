@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:paddingBottom="@dimen/row_padding_pub"
+    android:paddingLeft="@dimen/activity_margin"
+    android:paddingRight="@dimen/row_paddingRight_pub"
+    android:paddingTop="@dimen/row_padding">
+
+    <ImageView
+        android:id="@+id/photoCandidate"
+        android:layout_width="@dimen/thumbnail"
+        android:layout_height="@dimen/thumbnail"
+        android:layout_centerVertical="false"
+        android:layout_marginRight="@dimen/row_padding"
+        />
+
+    <TextView
+        android:id="@+id/nameCandidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/photoCandidate"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/candidate_name"
+        android:textSize="@dimen/contact_name"/>
+
+    <TextView
+        android:id="@+id/publicationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameCandidate"
+        android:layout_toRightOf="@id/photoCandidate"
+        android:textColor="@color/candidate_number"
+        android:textSize="@dimen/contact_number"/>
+
+    <TextView
+        android:id="@+id/publicationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/publicationDate"
+        android:paddingTop="@dimen/publicationText_paddingTop_pub"
+        android:textColor="@color/candidate_number"
+        android:textSize="@dimen/contact_number"
+        />
+
+</RelativeLayout>

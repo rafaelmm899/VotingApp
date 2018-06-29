@@ -13,11 +13,12 @@ public class Publication {
     String date;
     int idInstitution;
     String nameStudent;
+    String imageStudent;
 
     public Publication() {
     }
 
-    public Publication(int id, int idStudent, String text, String link, int idVote, String date, int idInstitution, String nameStudent) {
+    public Publication(int id, int idStudent, String text, String link, int idVote, String date, int idInstitution, String nameStudent,String imageStudent) {
         this.id = id;
         this.idStudent = idStudent;
         this.text = text;
@@ -26,6 +27,15 @@ public class Publication {
         this.date = date;
         this.idInstitution = idInstitution;
         this.nameStudent = nameStudent;
+        this.imageStudent = imageStudent;
+    }
+
+    public String getImageStudent() {
+        return imageStudent;
+    }
+
+    public void setImageStudent(String imageStudent) {
+        this.imageStudent = imageStudent;
     }
 
     public int getId() {

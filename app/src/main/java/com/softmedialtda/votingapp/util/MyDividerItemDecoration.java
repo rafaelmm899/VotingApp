@@ -1,4 +1,4 @@
-package com.softmedialtda.votingapp.voting.activity;
+package com.softmedialtda.votingapp.util;
 
 import android.content.Context;
 import android.content.res.Resources;

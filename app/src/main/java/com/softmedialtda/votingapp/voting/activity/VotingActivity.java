@@ -14,17 +14,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 import android.view.View;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import com.softmedialtda.votingapp.*;
-import com.softmedialtda.votingapp.dashboard.activity.DashboardActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
+import com.softmedialtda.votingapp.util.MyDividerItemDecoration;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
-import android.support.v7.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -186,7 +183,7 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         protected String doInBackground(String... params) {
             JSONObject paramaters = new JSONObject();
             String idCandidate = params[0];
-            if (!idCandidate.equals("")) { //TODO: VERIFICAR ESTO
+            if (!idCandidate.equals("")) {
                 try {
                     paramaters.accumulate("IDVOTING", voting.getId());
                     paramaters.accumulate("IDCANDIDATE", idCandidate);

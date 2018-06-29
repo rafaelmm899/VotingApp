@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.softmedialtda.votingapp.campaign.domain.Publication;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
@@ -50,6 +51,19 @@ public class Common {
             for (int i = 0; i < json.length(); i++){
                 JSONObject data = json.getJSONObject(i);
                 list.add(new Candidate(data.getString("NOMBRE"),data.getString("GRADO"),data.getString("GRUPO"),data.getString("IMAGE"),Integer.parseInt(data.getString("ID"))));
+            }
+        }catch (JSONException ex){
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ArrayList<Publication> getListPublication(JSONArray json){
+        ArrayList<Publication> list = new ArrayList<Publication>();
+        try {
+            for (int i = 0; i < json.length(); i++){
+                JSONObject data = json.getJSONObject(i);
+                list.add(new Publication(Integer.parseInt(data.getString("ID")),Integer.parseInt(data.getString("IDALUMNO")),data.getString("TEXT"),data.getString("LINK"),Integer.parseInt(data.getString("IDVOTING")),data.getString("DATE"),Integer.parseInt(data.getString("IDINSTITUCION")),data.getString("NOMBRE"),data.getString("IMAGE")));
             }
         }catch (JSONException ex){
             ex.printStackTrace();
