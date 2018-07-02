@@ -20,5 +20,6 @@
     <color name="bg_row_background">#fa315b</color>
     <color name="candidate_name">#333333</color>
     <color name="candidate_number">#8c8c8c</color>
+    <color name="color_background_transparent">#80000000</color>
 
 </resources>
