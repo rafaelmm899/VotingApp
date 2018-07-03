@@ -1,7 +1,9 @@
 package com.softmedialtda.votingapp.campaign.activity;
 
+import android.app.Activity;
 import android.content.Context;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -16,11 +18,13 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.widget.VideoView;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.softmedialtda.votingapp.R;
@@ -33,6 +37,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.softmedialtda.votingapp.util.Common.extractVideoIdFromUrl;
 import static com.softmedialtda.votingapp.util.Constants.YOUTUBEKEY;
 
 
@@ -47,11 +52,12 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
     private PublicationAdapterListener listener;
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder  {
         public TextView nameCandidate, publicationDate, publicationText;
         public ImageView photoCandidate;
         public VideoView videoPublicate;
         public YouTubeThumbnailView youTubeThumbnailView;
+        public RelativeLayout relativeLayoutOverYouTubeThumbnailView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -59,14 +65,13 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
             publicationDate = (TextView) itemView.findViewById(R.id.publicationDate);
             publicationText = (TextView) itemView.findViewById(R.id.publicationText);
             photoCandidate = (ImageView) itemView.findViewById(R.id.photoCandidate);
-            //videoPublicate = (VideoView) itemView.findViewById(R.id.videoPublicate);
+            relativeLayoutOverYouTubeThumbnailView = (RelativeLayout) itemView.findViewById(R.id.relativeLayout_over_youtube_thumbnail);
             youTubeThumbnailView = (YouTubeThumbnailView) itemView.findViewById(R.id.youtube_thumbnail);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //listener.onPublicatedSelected(listFiltered.get(getAdapterPosition()));
-                    //videoPublicate.start();
+                    listener.onPublicatedSelected(listFiltered.get(getAdapterPosition()));
                 }
             });
         }
@@ -78,8 +83,6 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         this.listFiltered = list;
         this.listener = listener;
     }
-
-
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
@@ -102,33 +105,10 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         }
 
         if (!publication.getLink().equals("")&&publication.getLink() != null&&!publication.getLink().equals("null")) {
-            //holder.videoPublicate.setVisibility(ImageView.VISIBLE);
+            holder.youTubeThumbnailView.setVisibility(ImageView.VISIBLE);
+            holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(ImageView.VISIBLE);
 
             try {
-                /*String urlVideo = publication.getLink();
-                Uri videoUri = Uri.parse(urlVideo);
-                MediaController mediacontroller = new MediaController(context);
-                mediacontroller.setAnchorView(holder.videoPublicate);
-                holder.videoPublicate.setMediaController(mediacontroller);
-                holder.videoPublicate.setVideoURI(videoUri);
-
-                holder.videoPublicate.requestFocus();
-                holder.videoPublicate.start();*/
-                //holder.videoPublicate.setVideoURI(videoUri);
-                /*holder.videoPublicate.setVideoPath(urlVideo);
-
-                        holder.videoPublicate.start();*/
-
-
-
-                /*holder.videoPublicate.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        mp.setLooping(true);
-                        //holder.videoPublicate.start();
-                    }
-                });*/
-
                 final YouTubeThumbnailLoader.OnThumbnailLoadedListener onThumbnailLoadedListener = new YouTubeThumbnailLoader.OnThumbnailLoadedListener(){
 
                     @Override
@@ -146,7 +126,8 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
                     @Override
                     public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader youTubeThumbnailLoader) {
-                        youTubeThumbnailLoader.setVideo("azxDhcKYku4");
+                        String idVideo =  extractVideoIdFromUrl(publication.getLink());
+                        youTubeThumbnailLoader.setVideo(idVideo);
                         youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
                     }
 

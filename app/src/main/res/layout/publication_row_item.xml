@@ -59,14 +59,16 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_below="@id/publicationText"/>
 
-    <RelativeLayout android:id="@+id/relativeLayout_over_youtube_thumbnail"
+    <RelativeLayout
+        android:id="@+id/relativeLayout_over_youtube_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@color/color_background_transparent"
-        android:visibility="visible">
+        android:visibility="gone"
+        android:layout_below="@id/publicationText">
 
         <ImageView android:id="@+id/btnYoutube_player"
             android:layout_width="match_parent"

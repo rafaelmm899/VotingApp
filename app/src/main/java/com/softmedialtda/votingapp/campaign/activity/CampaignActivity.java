@@ -1,7 +1,9 @@
 package com.softmedialtda.votingapp.campaign.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +11,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.softmedialtda.votingapp.R;
 import com.softmedialtda.votingapp.campaign.domain.Publication;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
@@ -21,9 +25,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.softmedialtda.votingapp.util.Common.getListPublication;
+import static com.softmedialtda.votingapp.util.Common.*;
 import static com.softmedialtda.votingapp.util.Connection.sendPost;
 import static com.softmedialtda.votingapp.util.Constants.DOMAIN;
+import static com.softmedialtda.votingapp.util.Constants.YOUTUBEKEY;
 
 public class CampaignActivity extends AppCompatActivity implements PublicationAdapter.PublicationAdapterListener {
     private RecyclerView recyclerView;
@@ -46,7 +51,7 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
 
         context = this;
-
+        mContext = this;
         new HttpAsyncTaskCampaign().execute(url);
     }
 
@@ -100,6 +105,13 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
 
     @Override
     public void onPublicatedSelected(Publication publication) {
+        try {
+            String idVideo =  extractVideoIdFromUrl(publication.getLink());
+            Intent intent = YouTubeStandalonePlayer.createVideoIntent(this, YOUTUBEKEY, idVideo,0,false,true);
+            this.startActivity(intent);
+        }catch (Exception e){
+            showMessage(getString(R.string.errorPlayingVideo),this);
+        }
 
     }
 }
