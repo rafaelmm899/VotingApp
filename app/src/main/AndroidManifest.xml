@@ -27,7 +27,8 @@
                 android:name="android.app.candidate_searchable"
                 android:resource="@xml/candidate_searchable" />
         </activity>
-        <activity android:name=".campaign.activity.CampaignActivity"></activity>
+        <activity android:name=".campaign.activity.CampaignActivity" />
+        <activity android:name=".stadistic.activity.StadisticActivity"></activity>
     </application>
 
 </manifest>

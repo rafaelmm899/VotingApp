@@ -15,6 +15,7 @@ import com.softmedialtda.votingapp.campaign.activity.CampaignActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.activity.LoginActivity;
 import com.softmedialtda.votingapp.login.domain.User;
+import com.softmedialtda.votingapp.stadistic.activity.StadisticActivity;
 import com.softmedialtda.votingapp.voting.activity.VotingActivity;
 
 import org.json.JSONArray;
@@ -69,10 +70,12 @@ public class DashboardActivity extends AppCompatActivity {
                 break;
             case R.id.campaignButton:
                 Intent intentCampaign = new Intent(DashboardActivity.this, CampaignActivity.class);
-                Log.e("algo","algo");
                 intentCampaign.putExtra("voting",voting);
                 startActivity(intentCampaign);
                 break;
+            case R.id.stadisticsButton:
+                Intent intentStadistic = new Intent(DashboardActivity.this, StadisticActivity.class);
+                startActivity(intentStadistic);
         }
 
     }
