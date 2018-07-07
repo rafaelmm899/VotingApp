@@ -11,4 +11,7 @@
     <dimen name="row_padding_pub">106dp</dimen>
     <dimen name="row_paddingRight_pub">16dp</dimen>
     <dimen name="publicationText_paddingTop_pub">16dp</dimen>
+
+    <dimen name="tvoto_font_size">18dp</dimen>
+    <dimen name="marginleft_voto_number">16dp</dimen>
 </resources>

@@ -63,6 +63,19 @@ public class Common {
         return list;
     }
 
+    public static ArrayList<Candidate> getListCandidateWithNumVote(JSONArray json){
+        ArrayList<Candidate> list = new ArrayList<Candidate>();
+        try {
+            for (int i = 0; i < json.length(); i++){
+                JSONObject data = json.getJSONObject(i);
+                list.add(new Candidate(data.getString("NOMBRE"),data.getString("GRADO"),data.getString("GRUPO"),data.getString("IMAGE"),Integer.parseInt(data.getString("ID")),data.getString("TVOTO")));
+            }
+        }catch (JSONException ex){
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
     public static ArrayList<Publication> getListPublication(JSONArray json){
         ArrayList<Publication> list = new ArrayList<Publication>();
         try {

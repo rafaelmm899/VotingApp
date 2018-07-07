@@ -10,6 +10,7 @@ public class Candidate {
     String group;
     String image;
     int id;
+    String tVoto;
 
     public Candidate() {
     }
@@ -20,6 +21,15 @@ public class Candidate {
         this.group = group;
         this.image = image;
         this.id = id;
+    }
+
+    public Candidate(String name, String grade, String group, String image, int id, String tVoto) {
+        this.name = name;
+        this.grade = grade;
+        this.group = group;
+        this.image = image;
+        this.id = id;
+        this.tVoto = tVoto;
     }
 
     public int getId() {
@@ -60,5 +70,13 @@ public class Candidate {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String gettVoto() {
+        return tVoto;
+    }
+
+    public void settVoto(String tVoto) {
+        this.tVoto = tVoto;
     }
 }

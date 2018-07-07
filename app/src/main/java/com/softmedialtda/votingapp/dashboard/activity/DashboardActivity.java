@@ -58,6 +58,14 @@ public class DashboardActivity extends AppCompatActivity {
                 clickListener(v);
             }
         });
+
+        LinearLayout stadisticButton = (LinearLayout) findViewById(R.id.stadisticsButton);
+        stadisticButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener(v);
+            }
+        });
     }
 
     private void clickListener (View v){
@@ -75,12 +83,12 @@ public class DashboardActivity extends AppCompatActivity {
                 break;
             case R.id.stadisticsButton:
                 Intent intentStadistic = new Intent(DashboardActivity.this, StadisticActivity.class);
+                intentStadistic.putExtra("user",user);
+                intentStadistic.putExtra("voting",voting);
                 startActivity(intentStadistic);
         }
 
     }
-
-
 
     private class HttpVotingAsyncTask extends AsyncTask<String, Void, String>{
         @Override
