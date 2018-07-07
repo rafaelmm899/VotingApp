@@ -1,9 +1,13 @@
 package com.softmedialtda.votingapp.util;
 
 import android.content.Context;
+
+import android.graphics.Color;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.data.PieEntry;
 import com.softmedialtda.votingapp.campaign.domain.Publication;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
@@ -14,11 +18,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 import static com.softmedialtda.votingapp.util.Constants.videoIdRegex;
 import static com.softmedialtda.votingapp.util.Constants.youTubeUrlRegEx;
+import static com.softmedialtda.votingapp.util.Constants.COLORS;
 
 /**
  * Created by Agustin on 18/6/2018.
@@ -125,6 +132,30 @@ public class Common {
             return url.replace(matcher.group(), "");
         }
         return url;
+    }
+
+
+    public static List<PieEntry> setListPieEntry(ArrayList<Candidate> list, int totalVoters){
+        List<PieEntry> entries = new ArrayList<>();
+        for (int i=0;i < list.size();i++){
+            Float tVoto = Float.parseFloat(list.get(i).gettVoto());
+            Float total = ((tVoto/5)*100);
+            entries.add(new PieEntry(total));
+        }
+
+        return entries;
+    }
+
+    public  static  ArrayList<LegendEntry> setListLegentEntry(ArrayList<Candidate> list){
+        ArrayList<LegendEntry> entries = new ArrayList<>();
+        for (int i=0;i < list.size();i++){
+            LegendEntry entry = new LegendEntry();
+            entry.formColor = COLORS[i];
+            entry.label = list.get(i).getName();
+            entries.add(entry);
+        }
+
+        return entries;
     }
 
 }

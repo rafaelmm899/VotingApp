@@ -1,5 +1,7 @@
 package com.softmedialtda.votingapp.util;
 
+import android.graphics.Color;
+
 /**
  * Created by Agustin on 18/6/2018.
  */
@@ -17,4 +19,5 @@ public class Constants {
     public static final String YOUTUBEKEY = "AIzaSyAdBxj0HutQ0cddMjYPbCKnAVTbckD944s";
     public static final String youTubeUrlRegEx = "^(https?)?(://)?(www.)?(m.)?((youtube.com)|(youtu.be))/";
     public static final String[] videoIdRegex = { "\\?vi?=([^&]*)","watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)", "^([A-Za-z0-9\\-]*)"};
+    public static final int[] COLORS = {Color.BLUE,Color.CYAN,Color.GREEN,Color.YELLOW,Color.RED};
 }
