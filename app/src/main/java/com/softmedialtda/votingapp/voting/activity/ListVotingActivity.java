@@ -10,6 +10,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.softmedialtda.votingapp.R;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
@@ -30,11 +32,11 @@ import static com.softmedialtda.votingapp.util.Constants.DOMAIN;
 
 public class ListVotingActivity extends AppCompatActivity implements VotingAdapter.VotingAdapterListener {
 
-    String url = DOMAIN+"votinglist";
+    String url = DOMAIN + "votinglist";
     User user;
-
+    Voting votingFirst;
     private RecyclerView recyclerView;
-    public  static Context context;
+    public static Context context;
     public static VotingAdapter.VotingAdapterListener mContext;
     ProgressDialog progressDialog;
 
@@ -42,6 +44,11 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_voting);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -53,14 +60,15 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
         mContext = this;
 
         user = (User) getIntent().getSerializableExtra("user");
+        votingFirst = (Voting) getIntent().getSerializableExtra("voting");
         new HttpListVotingAsyncTask().execute(url);
     }
 
     @Override
     public void onVotingSelected(Voting voting) {
         Intent intentVoting = new Intent(ListVotingActivity.this, StadisticActivity.class);
-        intentVoting.putExtra("user",user);
-        intentVoting.putExtra("voting",voting);
+        intentVoting.putExtra("user", user);
+        intentVoting.putExtra("voting", voting);
         startActivity(intentVoting);
     }
 
@@ -71,10 +79,10 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
             JSONObject paramaters = new JSONObject();
             try {
                 paramaters.accumulate("IDINSTITUCION", user.getIdInstitution());
-            }catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return sendPost(url,paramaters);
+            return sendPost(url, paramaters);
         }
 
         @Override
@@ -89,20 +97,36 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
 
         @Override
         protected void onPostExecute(String s) {
-            if (!s.equals("")){
+            if (!s.equals("")) {
                 try {
                     JSONArray response = new JSONArray(s);
                     ArrayList<Voting> list = getListVoting(response);
-                    if (list.size() > 0){
-                        VotingAdapter adapter = new VotingAdapter(context,list,mContext);
+                    if (list.size() > 0) {
+                        VotingAdapter adapter = new VotingAdapter(context, list, mContext);
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }
-                }catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             progressDialog.hide();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                Intent intentBack = new Intent(ListVotingActivity.this, StadisticActivity.class);
+                intentBack.putExtra("user", user);
+                intentBack.putExtra("voting", votingFirst);
+                startActivity(intentBack);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

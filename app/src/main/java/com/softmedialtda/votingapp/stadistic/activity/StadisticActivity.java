@@ -1,5 +1,6 @@
 package com.softmedialtda.votingapp.stadistic.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -57,7 +58,7 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
     public  static Context context;
     private RecyclerView recyclerView;
     private PieChart pieChart;
-
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -110,9 +111,6 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
-
     }
 
     @Override
@@ -172,6 +170,11 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(StadisticActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage(getResources().getString(R.string.pleaseWhait));
+            progressDialog.show();
         }
 
         @Override
@@ -179,8 +182,6 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
             if (!s.equals("")){
                 try{
                     JSONObject response = new JSONObject(s);
-
-
                     ArrayList<Candidate> candidates = getListCandidateWithNumVote(response.getJSONArray("CANDIDATE"));
                     if (candidates.size() > 0){
                         CandidateAdapter adapter = new CandidateAdapter(context,candidates,mContext);
@@ -215,9 +216,10 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
 
 
                 }catch (JSONException e){
-
+                    e.printStackTrace();
                 }
             }
+            progressDialog.hide();
         }
     }
 }
