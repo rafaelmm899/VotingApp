@@ -11,12 +11,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.softmedialtda.votingapp.R;
 import com.softmedialtda.votingapp.campaign.domain.Publication;
+import com.softmedialtda.votingapp.dashboard.activity.DashboardActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
+import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.util.MyDividerItemDecoration;
 
 import org.json.JSONArray;
@@ -34,6 +38,7 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
     private RecyclerView recyclerView;
     String url = DOMAIN+"publication";
     Voting voting;
+    User user;
     public  static Context context;
     public static PublicationAdapter.PublicationAdapterListener mContext;
     ProgressDialog progressDialog;
@@ -43,6 +48,12 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign);
         voting = (Voting) getIntent().getSerializableExtra("voting");
+        user = (User) getIntent().getSerializableExtra("user");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_campaign);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_campaign);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -113,5 +124,20 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
             showMessage(getString(R.string.errorPlayingVideo),this);
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case android.R.id.home:
+                Intent intentBack = new Intent(CampaignActivity.this, DashboardActivity.class);
+                intentBack.putExtra("user",user);
+                startActivity(intentBack);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

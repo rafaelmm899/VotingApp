@@ -37,4 +37,7 @@
     <string name="userHasAlreadyVoted">Ya usted ha votado</string>
     <string name="pleaseWhait">Por favor espere..</string>
     <string name="errorPlayingVideo">Error al reproducir el video</string>
+
+    
+    
 </resources>

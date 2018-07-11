@@ -78,6 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
                 break;
             case R.id.campaignButton:
                 Intent intentCampaign = new Intent(DashboardActivity.this, CampaignActivity.class);
+                intentCampaign.putExtra("user",user);
                 intentCampaign.putExtra("voting",voting);
                 startActivity(intentCampaign);
                 break;

@@ -14,4 +14,6 @@
 
     <dimen name="tvoto_font_size">18dp</dimen>
     <dimen name="marginleft_voto_number">16dp</dimen>
+
+    <dimen name="margintop_recyclerview">60dp</dimen>
 </resources>

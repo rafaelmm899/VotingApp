@@ -3,6 +3,7 @@ package com.softmedialtda.votingapp.voting.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -17,7 +18,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+
 import com.softmedialtda.votingapp.*;
+import com.softmedialtda.votingapp.dashboard.activity.DashboardActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.util.MyDividerItemDecoration;
@@ -49,12 +53,11 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        // toolbar fancy stuff
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setTitle(R.string.candidate_toolbar_title);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -115,17 +118,18 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-            return true;
+        switch (id){
+            case R.id.action_search:
+                return true;
+            case android.R.id.home:
+                Intent intentBack = new Intent(VotingActivity.this, DashboardActivity.class);
+                intentBack.putExtra("user",user);
+                startActivity(intentBack);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

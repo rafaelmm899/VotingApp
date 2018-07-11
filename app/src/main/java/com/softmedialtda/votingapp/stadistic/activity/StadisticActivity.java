@@ -22,12 +22,15 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.softmedialtda.votingapp.R;
+import com.softmedialtda.votingapp.dashboard.activity.DashboardActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.util.MyDividerItemDecoration;
 import com.softmedialtda.votingapp.voting.activity.CandidateAdapter;
 import com.softmedialtda.votingapp.voting.activity.ListVotingActivity;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -66,8 +69,11 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
         voting = (Voting) getIntent().getSerializableExtra("voting");
 
         pieChart = (PieChart) findViewById(R.id.graphic);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_stadistic);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -86,14 +92,27 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_search) {
-            Intent intentVoting = new Intent(StadisticActivity.this, ListVotingActivity.class);
-            intentVoting.putExtra("user",user);
-            intentVoting.putExtra("voting",voting);
-            startActivity(intentVoting);
-            return true;
+
+        switch (id){
+            case R.id.action_search:
+                Intent intentVoting = new Intent(StadisticActivity.this, ListVotingActivity.class);
+                intentVoting.putExtra("user",user);
+                intentVoting.putExtra("voting",voting);
+                startActivity(intentVoting);
+                return true;
+
+            case android.R.id.home:
+                Intent intentBack = new Intent(StadisticActivity.this, DashboardActivity.class);
+                intentBack.putExtra("user",user);
+                startActivity(intentBack);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+
+
+
     }
 
     @Override
