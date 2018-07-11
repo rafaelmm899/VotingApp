@@ -1,6 +1,7 @@
 package com.softmedialtda.votingapp.stadistic.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-
+import android.support.v7.widget.Toolbar;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -24,7 +26,10 @@ import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.util.MyDividerItemDecoration;
 import com.softmedialtda.votingapp.voting.activity.CandidateAdapter;
+import com.softmedialtda.votingapp.voting.activity.ListVotingActivity;
 import com.softmedialtda.votingapp.voting.domain.Candidate;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +56,7 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
     private PieChart pieChart;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +66,8 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
         voting = (Voting) getIntent().getSerializableExtra("voting");
 
         pieChart = (PieChart) findViewById(R.id.graphic);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_stadistic);
+        setSupportActionBar(toolbar);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -68,6 +75,25 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
         new HttpStadisticsAsyncTask().execute(url);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.stadistic_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_search) {
+            Intent intentVoting = new Intent(StadisticActivity.this, ListVotingActivity.class);
+            intentVoting.putExtra("user",user);
+            intentVoting.putExtra("voting",voting);
+            startActivity(intentVoting);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

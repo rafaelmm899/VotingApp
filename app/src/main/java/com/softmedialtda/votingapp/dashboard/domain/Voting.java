@@ -11,6 +11,9 @@ public class Voting implements Serializable {
     String name;
     int idInstitution;
     int userVoted;
+    String dateBegin;
+    String dateFinish;
+    String academicPeriod;
 
     public Voting() {
 
@@ -21,6 +24,15 @@ public class Voting implements Serializable {
         this.name = name;
         this.idInstitution = idInstitution;
         this.userVoted = userVoted;
+    }
+
+    public Voting(int id, String name, int idInstitution, String dateBegin, String dateFinish, String academicPeriod) {
+        this.id = id;
+        this.name = name;
+        this.idInstitution = idInstitution;
+        this.dateBegin = dateBegin;
+        this.dateFinish = dateFinish;
+        this.academicPeriod = academicPeriod;
     }
 
     public int getUserVoted() {
@@ -53,5 +65,29 @@ public class Voting implements Serializable {
 
     public void setIdInstitution(int idInstitution) {
         this.idInstitution = idInstitution;
+    }
+
+    public String getDateBegin() {
+        return dateBegin;
+    }
+
+    public void setDateBegin(String dateBegin) {
+        this.dateBegin = dateBegin;
+    }
+
+    public String getDateFinish() {
+        return dateFinish;
+    }
+
+    public void setDateFinish(String dateFinish) {
+        this.dateFinish = dateFinish;
+    }
+
+    public String getAcademicPeriod() {
+        return academicPeriod;
+    }
+
+    public void setAcademicPeriod(String academicPeriod) {
+        this.academicPeriod = academicPeriod;
     }
 }

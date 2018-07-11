@@ -70,6 +70,19 @@ public class Common {
         return list;
     }
 
+    public static ArrayList<Voting> getListVoting(JSONArray json){
+        ArrayList<Voting> list = new ArrayList<Voting>();
+        try {
+            for (int i = 0; i < json.length(); i++) {
+                JSONObject data = json.getJSONObject(i);
+                list.add(new Voting(Integer.parseInt(data.getString("ID")),data.getString("NOMBRE"),Integer.parseInt(data.getString("IDINSTITUCION")),data.getString("FINICIOELECCIONES"),data.getString("FFINALELECCIONES"),data.getString("PERACADEMICO")));
+            }
+        }catch (JSONException ex){
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
     public static ArrayList<Candidate> getListCandidateWithNumVote(JSONArray json){
         ArrayList<Candidate> list = new ArrayList<Candidate>();
         try {

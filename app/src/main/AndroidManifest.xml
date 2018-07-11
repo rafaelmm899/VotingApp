@@ -28,7 +28,8 @@
                 android:resource="@xml/candidate_searchable" />
         </activity>
         <activity android:name=".campaign.activity.CampaignActivity" />
-        <activity android:name=".stadistic.activity.StadisticActivity"></activity>
+        <activity android:name=".stadistic.activity.StadisticActivity" />
+        <activity android:name=".voting.activity.ListVotingActivity"></activity>
     </application>
 
 </manifest>

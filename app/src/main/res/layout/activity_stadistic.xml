@@ -8,6 +8,13 @@
     android:orientation="vertical"
     tools:context="com.softmedialtda.votingapp.stadistic.activity.StadisticActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_stadistic"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        />
+
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
         android:layout_height="268dp"
