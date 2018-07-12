@@ -69,7 +69,19 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         voting = (Voting) getIntent().getSerializableExtra("voting");
         context = this;
         mContext = this;
-        new HttpAsyncTask().execute(url);
+        if (voting.getId() == 0){
+            new AlertDialog.Builder(context).setTitle(R.string.notElectionDay).setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intentBack = new Intent(VotingActivity.this, DashboardActivity.class);
+                    intentBack.putExtra("user",user);
+                    startActivity(intentBack);
+                }
+            }).show();
+        }else {
+            new HttpAsyncTask().execute(url);
+        }
+
     }
 
 

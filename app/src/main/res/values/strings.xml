@@ -41,6 +41,7 @@
     <string name="userHasAlreadyVoted">Ya usted ha votado</string>
     <string name="pleaseWhait">Por favor espere..</string>
     <string name="errorPlayingVideo">Error al reproducir el video</string>
+    <string name="notElectionDay">No es fecha de elecciones</string>
 
 
 </resources>
