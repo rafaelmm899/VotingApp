@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:paddingBottom="@dimen/row_padding"
+    android:paddingLeft="@dimen/activity_margin"
+    android:paddingRight="@dimen/activity_margin"
+    android:paddingTop="@dimen/row_padding">
+
+    <TextView
+        android:id="@+id/dateBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/candidate_number"
+        android:text="11/07/2018"
+        android:textSize="@dimen/dateBeginTextSize" />
+
+    <TextView
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:layout_marginLeft="@dimen/margin_separate_date"
+        android:layout_marginRight="@dimen/margin_separate_date"
+        android:layout_toRightOf="@+id/dateBegin"/>
+
+    <TextView
+        android:id="@+id/dateFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12/07/2018"
+        android:layout_toRightOf="@+id/separator"
+        android:textSize="@dimen/dateBeginTextSize"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:layout_below="@id/dateBegin"
+        android:textColor="@color/candidate_name"
+        android:text="Jose Rafael Mata Milano"
+        android:textSize="@dimen/contact_name" />
+
+
+
+
+</RelativeLayout>

@@ -155,20 +155,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/calendar">
 
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/cerclebackgroundyello"
                     android:padding="10dp"
-                    android:src="@mipmap/ic_others" />
+                    android:src="@mipmap/ic_calendar" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@string/others_textview"
+                    android:text="@string/calendar_textview"
                     android:textStyle="bold" />
 
                 <View
@@ -182,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="@string/others_info"
+                    android:text="@string/calendar_info"
                     android:textColor="@android:color/darker_gray" />
 
             </LinearLayout>

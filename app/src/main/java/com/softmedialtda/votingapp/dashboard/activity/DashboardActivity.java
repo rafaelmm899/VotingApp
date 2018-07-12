@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.softmedialtda.votingapp.R;
+import com.softmedialtda.votingapp.calendar.activity.CalendarActivity;
 import com.softmedialtda.votingapp.campaign.activity.CampaignActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.activity.LoginActivity;
@@ -66,6 +67,14 @@ public class DashboardActivity extends AppCompatActivity {
                 clickListener(v);
             }
         });
+
+        LinearLayout calendarButton = (LinearLayout) findViewById(R.id.calendar);
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener(v);
+            }
+        });
     }
 
     private void clickListener (View v){
@@ -87,6 +96,11 @@ public class DashboardActivity extends AppCompatActivity {
                 intentStadistic.putExtra("user",user);
                 intentStadistic.putExtra("voting",voting);
                 startActivity(intentStadistic);
+                break;
+            case R.id.calendar:
+                Intent intentCalendar = new Intent(DashboardActivity.this, CalendarActivity.class);
+                intentCalendar.putExtra("user",user);
+                startActivity(intentCalendar);
         }
 
     }

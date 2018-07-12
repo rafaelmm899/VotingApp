@@ -22,6 +22,8 @@
     <string name="others_textview">Otros</string>
     <string name="others_info">Seccion por definir</string>
     <string name="vote_textview">Votar</string>
+    <string name="calendar_textview">Calendario</string>
+    <string name="calendar_info">Vea las fechas de las siguientes elecciones</string>
 
     <!-- Voting View -->
     <string name="action_search">Buscar</string>
@@ -38,6 +40,5 @@
     <string name="pleaseWhait">Por favor espere..</string>
     <string name="errorPlayingVideo">Error al reproducir el video</string>
 
-    
-    
+
 </resources>

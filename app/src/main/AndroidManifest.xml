@@ -29,7 +29,8 @@
         </activity>
         <activity android:name=".campaign.activity.CampaignActivity" />
         <activity android:name=".stadistic.activity.StadisticActivity" />
-        <activity android:name=".voting.activity.ListVotingActivity"></activity>
+        <activity android:name=".voting.activity.ListVotingActivity" />
+        <activity android:name=".calendar.activity.CalendarActivity"></activity>
     </application>
 
 </manifest>
