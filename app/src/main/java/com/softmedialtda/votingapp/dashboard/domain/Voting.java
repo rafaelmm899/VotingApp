@@ -14,16 +14,18 @@ public class Voting implements Serializable {
     String dateBegin;
     String dateFinish;
     String academicPeriod;
+    boolean active;
 
     public Voting() {
 
     }
 
-    public Voting(int id, String name, int idInstitution, int userVoted) {
+    public Voting(int id, String name, int idInstitution, int userVoted, boolean active) {
         this.id = id;
         this.name = name;
         this.idInstitution = idInstitution;
         this.userVoted = userVoted;
+        this.active = active;
     }
 
     public Voting(int id, String name, int idInstitution, String dateBegin, String dateFinish, String academicPeriod) {
@@ -34,6 +36,8 @@ public class Voting implements Serializable {
         this.dateFinish = dateFinish;
         this.academicPeriod = academicPeriod;
     }
+
+
 
     public int getUserVoted() {
         return userVoted;
@@ -89,5 +93,13 @@ public class Voting implements Serializable {
 
     public void setAcademicPeriod(String academicPeriod) {
         this.academicPeriod = academicPeriod;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

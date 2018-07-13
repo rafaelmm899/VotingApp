@@ -116,6 +116,7 @@ public class Common {
             object.setName(json.getString("NOMBRE"));
             object.setIdInstitution(Integer.parseInt(json.getString("IDINSTITUCION")));
             object.setUserVoted(Integer.parseInt(json.getString("VOTO")));
+            object.setActive(Boolean.valueOf(json.getString("ACTIVE")));
         }catch (JSONException ex){
             ex.printStackTrace();
         }

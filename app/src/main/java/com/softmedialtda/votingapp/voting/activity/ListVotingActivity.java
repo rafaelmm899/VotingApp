@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.softmedialtda.votingapp.R;
+import com.softmedialtda.votingapp.campaign.activity.CampaignActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.stadistic.activity.StadisticActivity;
@@ -39,6 +40,7 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
     public static Context context;
     public static VotingAdapter.VotingAdapterListener mContext;
     ProgressDialog progressDialog;
+    public static String typeActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +63,26 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
 
         user = (User) getIntent().getSerializableExtra("user");
         votingFirst = (Voting) getIntent().getSerializableExtra("voting");
+        typeActivity = getIntent().getStringExtra("typeActivity");
         new HttpListVotingAsyncTask().execute(url);
     }
 
     @Override
     public void onVotingSelected(Voting voting) {
-        Intent intentVoting = new Intent(ListVotingActivity.this, StadisticActivity.class);
-        intentVoting.putExtra("user", user);
-        intentVoting.putExtra("voting", voting);
-        startActivity(intentVoting);
+        switch (typeActivity){
+            case "STADISTIC":
+                Intent intentVoting = new Intent(ListVotingActivity.this, StadisticActivity.class);
+                intentVoting.putExtra("user", user);
+                intentVoting.putExtra("voting", voting);
+                startActivity(intentVoting);
+                break;
+            case "CAMPAIGN":
+                Intent intentCampaing = new Intent(ListVotingActivity.this, CampaignActivity.class);
+                intentCampaing.putExtra("user", user);
+                intentCampaing.putExtra("voting", voting);
+                startActivity(intentCampaing);
+        }
+
     }
 
     private class HttpListVotingAsyncTask extends AsyncTask<String, Void, String> {

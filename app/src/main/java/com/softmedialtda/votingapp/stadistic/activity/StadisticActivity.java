@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -59,7 +60,7 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
     private RecyclerView recyclerView;
     private PieChart pieChart;
     ProgressDialog progressDialog;
-
+    public static String typeActivity = "STADISTIC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,10 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
 
         user = (User) getIntent().getSerializableExtra("user");
         voting = (Voting) getIntent().getSerializableExtra("voting");
+
+        if (!voting.isActive()){
+            new AlertDialog.Builder(this).setMessage(R.string.noElectionDayShowLast).setNeutralButton(R.string.ok,null).show();
+        }
 
         pieChart = (PieChart) findViewById(R.id.graphic);
 
@@ -99,6 +104,7 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
                 Intent intentVoting = new Intent(StadisticActivity.this, ListVotingActivity.class);
                 intentVoting.putExtra("user",user);
                 intentVoting.putExtra("voting",voting);
+                intentVoting.putExtra("typeActivity",typeActivity);
                 startActivity(intentVoting);
                 return true;
 

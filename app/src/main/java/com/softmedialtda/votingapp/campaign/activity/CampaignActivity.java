@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
@@ -22,6 +24,7 @@ import com.softmedialtda.votingapp.dashboard.activity.DashboardActivity;
 import com.softmedialtda.votingapp.dashboard.domain.Voting;
 import com.softmedialtda.votingapp.login.domain.User;
 import com.softmedialtda.votingapp.util.MyDividerItemDecoration;
+import com.softmedialtda.votingapp.voting.activity.ListVotingActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +45,7 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
     public  static Context context;
     public static PublicationAdapter.PublicationAdapterListener mContext;
     ProgressDialog progressDialog;
+    public static String typeActivity = "CAMPAIGN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,10 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
         setContentView(R.layout.activity_campaign);
         voting = (Voting) getIntent().getSerializableExtra("voting");
         user = (User) getIntent().getSerializableExtra("user");
+
+        if (!voting.isActive()){
+            new AlertDialog.Builder(this).setMessage(R.string.noElectionDayShowLast).setNeutralButton(R.string.ok,null).show();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_campaign);
         setSupportActionBar(toolbar);
@@ -64,6 +72,12 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
         context = this;
         mContext = this;
         new HttpAsyncTaskCampaign().execute(url);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.campaign_menu, menu);
+        return true;
     }
 
     private class HttpAsyncTaskCampaign extends AsyncTask<String, Void, String> {
@@ -134,6 +148,14 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
                 Intent intentBack = new Intent(CampaignActivity.this, DashboardActivity.class);
                 intentBack.putExtra("user",user);
                 startActivity(intentBack);
+                return true;
+
+            case R.id.search_voting:
+                Intent intentVoting = new Intent(CampaignActivity.this, ListVotingActivity.class);
+                intentVoting.putExtra("user",user);
+                intentVoting.putExtra("voting",voting);
+                intentVoting.putExtra("typeActivity",typeActivity);
+                startActivity(intentVoting);
                 return true;
 
             default:

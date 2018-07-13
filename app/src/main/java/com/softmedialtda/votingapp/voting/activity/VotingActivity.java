@@ -69,8 +69,8 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         voting = (Voting) getIntent().getSerializableExtra("voting");
         context = this;
         mContext = this;
-        if (voting.getId() == 0){
-            new AlertDialog.Builder(context).setTitle(R.string.notElectionDay).setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+        if (voting.getId() == 0 || !voting.isActive()){
+            new AlertDialog.Builder(context).setMessage(R.string.notElectionDay).setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intentBack = new Intent(VotingActivity.this, DashboardActivity.class);

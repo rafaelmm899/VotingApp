@@ -43,5 +43,9 @@
     <string name="errorPlayingVideo">Error al reproducir el video</string>
     <string name="notElectionDay">No es fecha de elecciones</string>
 
+    <!-- campaign view -->
+    <string name="search_voting">Seleccionar otra eleccion</string>
+    <string name="noElectionDayShowLast">No es fecha de elecciones, se mostrara la ultima eleccion finalizada</string>
+
 
 </resources>
