@@ -6,7 +6,7 @@
 
     <color name="colorPrimary">#FFC107</color>
     <color name="colorPrimaryDark">#FFA000</color>
-    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="backgroundcolor">#f1f1f1</color>
     <color name="lightgray">#ededed</color>
     <color name="deeppurple">#7c4dff</color>
     <color name="yello">#ffb300</color>
@@ -22,4 +22,8 @@
     <color name="candidate_number">#8c8c8c</color>
     <color name="color_background_transparent">#80000000</color>
 
+    <color name="transparent_bg">#2affffff</color>
+    <color name="grey_white_1000">#ffffff</color>
+    <color name="success_info">#FF0DFF00</color>
+    <color name="warning_info">#ff0000</color>
 </resources>

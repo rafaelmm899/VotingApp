@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.softmedialtda.votingapp.R;
 import com.softmedialtda.votingapp.calendar.activity.CalendarActivity;
@@ -43,6 +45,7 @@ public class DashboardActivity extends AppCompatActivity {
     Voting voting;
     ProgressDialog progressDialog;
     Context context;
+    TextView infoVoting;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,10 +54,16 @@ public class DashboardActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         new HttpVotingAsyncTask().execute(url);
 
+        LinearLayout cardViewInfo = (LinearLayout) findViewById(R.id.cardViewInfo);
+
+        infoVoting = (TextView) findViewById(R.id.infoVoting_TextView);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         LinearLayout votingButton = (LinearLayout) findViewById(R.id.votingButton);
+
         votingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +180,15 @@ public class DashboardActivity extends AppCompatActivity {
                     JSONArray response = new JSONArray(s);
                     JSONObject data = response.getJSONObject(0);
                     voting = getCurrentVotes(data);
+
+                    if (voting.isActive()){
+                        infoVoting.setText(getResources().getString(R.string.voteIsActive)+" "+voting.getName());
+                        infoVoting.setTextColor(getResources().getColor(R.color.success_info));
+                    }else{
+                        infoVoting.setText(getResources().getString(R.string.voteIsNotActive));
+                        infoVoting.setTextColor(getResources().getColor(R.color.warning_info));
+                    }
+
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }
