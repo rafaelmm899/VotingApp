@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.softmedialtda.votingapp.R;
@@ -46,11 +47,13 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
     public static PublicationAdapter.PublicationAdapterListener mContext;
     ProgressDialog progressDialog;
     public static String typeActivity = "CAMPAIGN";
+    TextView VotingName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign);
+        VotingName = (TextView) findViewById(R.id.VotingName);
         voting = (Voting) getIntent().getSerializableExtra("voting");
         user = (User) getIntent().getSerializableExtra("user");
 
@@ -58,7 +61,10 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
             new AlertDialog.Builder(this).setMessage(R.string.noElectionDayShowLast).setNeutralButton(R.string.ok,null).show();
         }
 
+        VotingName.setText(voting.getName());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_campaign);
+        toolbar.setTitle(getResources().getString(R.string.publicationTitle));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -67,7 +73,7 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         context = this;
         mContext = this;
@@ -130,12 +136,17 @@ public class CampaignActivity extends AppCompatActivity implements PublicationAd
 
     @Override
     public void onPublicatedSelected(Publication publication) {
-        try {
-            String idVideo =  extractVideoIdFromUrl(publication.getLink());
-            Intent intent = YouTubeStandalonePlayer.createVideoIntent(this, YOUTUBEKEY, idVideo,0,false,true);
-            this.startActivity(intent);
-        }catch (Exception e){
-            showMessage(getString(R.string.errorPlayingVideo),this);
+        if (!publication.getLink().equals("")&&!publication.getLink().equals("null")) {
+            try {
+
+                String idVideo = extractVideoIdFromUrl(publication.getLink());
+                Intent intent = YouTubeStandalonePlayer.createVideoIntent(this, YOUTUBEKEY, idVideo, 0, false, true);
+                this.startActivity(intent);
+
+
+            } catch (Exception e) {
+                showMessage(getString(R.string.errorPlayingVideo), this);
+            }
         }
 
     }

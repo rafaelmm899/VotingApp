@@ -35,13 +35,14 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.MyVi
     private CandidateAdapterListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, grade, tvoto;
+        public TextView name, grade,group, tvoto;
         public ImageView thumbnail;
 
         public MyViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
             grade = (TextView) view.findViewById(R.id.grade);
+            group = (TextView) view.findViewById(R.id.group);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             tvoto = (TextView) view.findViewById(R.id.tvoto);
 
@@ -76,6 +77,7 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.MyVi
         final Candidate candidate = candidateListFiltered.get(position);
         holder.name.setText(candidate.getName());
         holder.grade.setText(candidate.getGrade());
+        holder.group.setText(candidate.getGroup());
 
         if (candidate.gettVoto() != null){
             holder.tvoto.setText(candidate.gettVoto()+" Votos");

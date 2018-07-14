@@ -34,6 +34,17 @@
         android:layout_below="@id/name"
         android:layout_toRightOf="@id/thumbnail"
         android:textColor="@color/candidate_number"
+        android:text="septimo"
+        android:textSize="@dimen/contact_number" />
+
+    <TextView
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/maringLeft_group"
+        android:layout_below="@id/name"
+        android:layout_toRightOf="@id/grade"
+        android:textColor="@color/candidate_number"
         android:text="1"
         android:textSize="@dimen/contact_number" />
 

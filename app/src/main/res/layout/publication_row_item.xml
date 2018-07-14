@@ -3,79 +3,86 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:background="@drawable/bg_list_row"
     android:clickable="true"
-    android:paddingBottom="@dimen/row_padding_pub"
-    android:paddingLeft="@dimen/activity_margin"
-    android:paddingRight="@dimen/row_paddingRight_pub"
-    android:paddingTop="@dimen/row_padding">
-
-    <ImageView
-        android:id="@+id/photoCandidate"
-        android:layout_width="@dimen/thumbnail"
-        android:layout_height="@dimen/thumbnail"
-        android:layout_centerVertical="false"
-        android:layout_marginRight="@dimen/row_padding"
-        />
-
-    <TextView
-        android:id="@+id/nameCandidate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/photoCandidate"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@color/candidate_name"
-        android:textSize="@dimen/contact_name"/>
-
-    <TextView
-        android:id="@+id/publicationDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nameCandidate"
-        android:layout_toRightOf="@id/photoCandidate"
-        android:textColor="@color/candidate_number"
-        android:textSize="@dimen/contact_number"/>
-
-    <TextView
-        android:id="@+id/publicationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/publicationDate"
-        android:paddingTop="@dimen/publicationText_paddingTop_pub"
-        android:textColor="@color/candidate_number"
-        android:textSize="@dimen/contact_number"
-        />
-
-    <!--<VideoView
-        android:id="@+id/videoPublicate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:layout_below="@id/publicationText"
-        />-->
-
-    <com.google.android.youtube.player.YouTubeThumbnailView
-        android:id="@+id/youtube_thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        android:visibility="gone"
-        android:layout_below="@id/publicationText"/>
+    android:paddingBottom="@dimen/padding_list_row"
+    android:paddingLeft="?listPreferredItemPaddingLeft"
+    android:paddingRight="?listPreferredItemPaddingRight"
+    android:paddingTop="@dimen/padding_list_row">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout_over_youtube_thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@color/color_background_transparent"
-        android:visibility="gone"
-        android:layout_below="@id/publicationText">
+        android:id="@+id/icon_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView android:id="@+id/btnYoutube_player"
+        <ImageView
+            android:id="@+id/photoCandidate"
+            android:layout_width="@dimen/thumbnail"
+            android:layout_height="@dimen/thumbnail"
+            android:layout_centerVertical="false"
+            android:layout_marginRight="@dimen/row_padding"
+            />
+
+        <TextView
+            android:id="@+id/nameCandidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/photoCandidate"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/candidate_name"
+            android:textSize="@dimen/contact_name"/>
+
+        <TextView
+            android:id="@+id/publicationDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameCandidate"
+            android:layout_toRightOf="@id/photoCandidate"
+            android:textColor="@color/candidate_number"
+            android:textSize="@dimen/contact_number"/>
+
+        <TextView
+            android:id="@+id/publicationText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="center"
-            android:src="@mipmap/ic_youtube_button"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/publicationDate"
+            android:paddingTop="@dimen/publicationText_paddingTop_pub"
+            android:textColor="@color/candidate_number"
+            android:textSize="@dimen/contact_number"
+            />
 
+        <!--<VideoView
+            android:id="@+id/videoPublicate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:layout_below="@id/publicationText"
+            />-->
+
+        <com.google.android.youtube.player.YouTubeThumbnailView
+            android:id="@+id/youtube_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:layout_below="@id/publicationText"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_over_youtube_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/color_background_transparent"
+            android:visibility="gone"
+            android:layout_below="@id/publicationText">
+
+            <ImageView android:id="@+id/btnYoutube_player"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@mipmap/ic_youtube_button"/>
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

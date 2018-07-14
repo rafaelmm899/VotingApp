@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,6 +20,8 @@ import android.view.View;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.softmedialtda.votingapp.*;
 import com.softmedialtda.votingapp.dashboard.activity.DashboardActivity;
@@ -47,21 +50,36 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
     public  static Context context;
     private RecyclerView recyclerView;
     ProgressDialog progressDialog;
+    TextView votingName;
+    LinearLayout votingDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting);
+        votingName = (TextView) findViewById(R.id.VotingName);
+        votingDescription = (LinearLayout) findViewById(R.id.votingDescription);
 
+        votingDescription.setVisibility(View.VISIBLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(getResources().getString(R.string.candidateTitle));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        ViewGroup.MarginLayoutParams marginLayoutParams =
+                (ViewGroup.MarginLayoutParams) recyclerView.getLayoutParams();
+
+        marginLayoutParams.setMargins(0,200,0,0);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
 
 
@@ -79,6 +97,7 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
                 }
             }).show();
         }else {
+            votingName.setText(voting.getName());
             new HttpAsyncTask().execute(url);
         }
 

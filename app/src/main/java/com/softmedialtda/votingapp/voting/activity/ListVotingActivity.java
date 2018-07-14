@@ -12,6 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.softmedialtda.votingapp.R;
 import com.softmedialtda.votingapp.campaign.activity.CampaignActivity;
@@ -41,6 +43,7 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
     public static VotingAdapter.VotingAdapterListener mContext;
     ProgressDialog progressDialog;
     public static String typeActivity;
+    LinearLayout votingDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +51,12 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
         setContentView(R.layout.activity_list_voting);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(getResources().getString(R.string.selectAVote));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        votingDescription = (LinearLayout) findViewById(R.id.votingDescription);
+        votingDescription.setVisibility(View.GONE);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -132,10 +138,18 @@ public class ListVotingActivity extends AppCompatActivity implements VotingAdapt
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
-                Intent intentBack = new Intent(ListVotingActivity.this, StadisticActivity.class);
-                intentBack.putExtra("user", user);
-                intentBack.putExtra("voting", votingFirst);
-                startActivity(intentBack);
+                if (typeActivity.equals("STADISTIC")){
+                    Intent intentBack = new Intent(ListVotingActivity.this, StadisticActivity.class);
+                    intentBack.putExtra("user", user);
+                    intentBack.putExtra("voting", votingFirst);
+                    startActivity(intentBack);
+                }else if (typeActivity.equals("CAMPAIGN")){
+                    Intent intentCampaing = new Intent(ListVotingActivity.this, CampaignActivity.class);
+                    intentCampaing.putExtra("user", user);
+                    intentCampaing.putExtra("voting", votingFirst);
+                    startActivity(intentCampaing);
+                }
+
                 return true;
 
             default:

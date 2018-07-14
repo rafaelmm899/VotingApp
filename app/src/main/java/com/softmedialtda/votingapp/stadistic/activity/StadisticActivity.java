@@ -42,6 +42,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Pair;
 
 import static com.softmedialtda.votingapp.util.Common.getListCandidate;
 import static com.softmedialtda.votingapp.util.Common.getListCandidateWithNumVote;
@@ -77,6 +78,7 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
         pieChart = (PieChart) findViewById(R.id.graphic);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_stadistic);
+        toolbar.setTitle(getResources().getString(R.string.stadisticsTitle));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -85,7 +87,7 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         new HttpStadisticsAsyncTask().execute(url);
     }
 
@@ -130,7 +132,7 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
         chart.getDescription().setTextSize(15);
         int height = pieChart.getHeight();
         int width = pieChart.getWidth();
-        chart.getDescription().setPosition((width / 2),height);
+        chart.getDescription().setPosition((width / 2),(height /8));
         chart.setBackgroundColor(background);
         chart.animateY(animate);
         legendGraphic(chart,entries);
@@ -200,22 +202,25 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
 
 
                     List<PieEntry> entries = setListPieEntry(candidates,numVoters);
-                    ArrayList<LegendEntry> legendEntries = setListLegentEntry(candidates);
+                    Pair<List<Integer>,ArrayList<LegendEntry>> temp = setListLegentEntry(candidates);
+
+                    ArrayList<LegendEntry> legendEntries = temp.second;
+                    List<Integer> colors = temp.first;
                     /*PieDataSet set = new PieDataSet(entries, "Election Results");
                     PieData data = new PieData(set);
                     pieChart.setData(data);
                     pieChart.invalidate(); // refresh*/
 
 
-                    pieChart = (PieChart) getSameChart(pieChart,voting.getName(), Color.BLACK,Color.GRAY,3000, legendEntries);
+                    pieChart = (PieChart) getSameChart(pieChart,voting.getName(), Color.BLACK,Color.LTGRAY,3000, legendEntries);
                     pieChart.setHoleRadius(64);
-                    pieChart.setCenterText("Total de votantes "+String.valueOf(numVoters));
+                    pieChart.setCenterText(getResources().getString(R.string.totalVoters)+" "+String.valueOf(numVoters));
                     pieChart.setTransparentCircleRadius(8);
                     PieDataSet set = (PieDataSet)getData(new PieDataSet(entries, ""));
 
                     set.setSliceSpace(2);
                     set.setValueFormatter(new PercentFormatter());
-                    set.setColors(COLORS);
+                    set.setColors(colors);
                     PieData data = new PieData(set);
                     pieChart.setData(data);
                     pieChart.invalidate();

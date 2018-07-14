@@ -3,6 +3,7 @@ package com.softmedialtda.votingapp.util;
 import android.content.Context;
 
 import android.graphics.Color;
+import android.util.Pair;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -153,23 +155,31 @@ public class Common {
         List<PieEntry> entries = new ArrayList<>();
         for (int i=0;i < list.size();i++){
             Float tVoto = Float.parseFloat(list.get(i).gettVoto());
-            Float total = ((tVoto/5)*100);
+            Float total = ((tVoto/totalVoters)*100);
             entries.add(new PieEntry(total));
         }
 
         return entries;
     }
 
-    public  static  ArrayList<LegendEntry> setListLegentEntry(ArrayList<Candidate> list){
+    public  static Pair<List<Integer>,ArrayList<LegendEntry>> setListLegentEntry(ArrayList<Candidate> list){
+        List<Integer> arrayColors = new ArrayList<Integer>();
         ArrayList<LegendEntry> entries = new ArrayList<>();
         for (int i=0;i < list.size();i++){
             LegendEntry entry = new LegendEntry();
-            entry.formColor = COLORS[i];
+            int color;
+            do {
+                Random rnd = new Random();
+                color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            }while (arrayColors.contains(color));
+
+            arrayColors.add(color);
+            entry.formColor = color;
             entry.label = list.get(i).getName();
             entries.add(entry);
         }
 
-        return entries;
+        return new Pair<List<Integer>,ArrayList<LegendEntry>>(arrayColors,entries);
     }
 
 }

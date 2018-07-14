@@ -44,10 +44,20 @@
     <string name="pleaseWhait">Por favor espere..</string>
     <string name="errorPlayingVideo">Error al reproducir el video</string>
     <string name="notElectionDay">No es fecha de elecciones</string>
+    <string name="candidateTitle">Candidatos</string>
 
     <!-- campaign view -->
     <string name="search_voting">Seleccionar otra eleccion</string>
     <string name="noElectionDayShowLast">No es fecha de elecciones, se mostrara la ultima eleccion finalizada</string>
+    <string name="selectAVote">Seleccione..</string>
+    <string name="publicationTitle">Publicaciones</string>
+    <string name="stadisticsTitle">Estadisticas</string>
+
+    <!-- calendar view -->
+    <string name="calendarTitle">Calendario</string>
+
+    <!-- stadistic view -->
+    <string name="totalVoters">Total de votantes</string>
 
 
 </resources>
