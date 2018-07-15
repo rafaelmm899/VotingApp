@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VotingApp</string>
+    <string name="app_name">Votaciones</string>
 
     <!-- login view -->
     <string name="username_loginactivity">Usuario</string>

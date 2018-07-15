@@ -16,6 +16,8 @@ import com.softmedialtda.votingapp.login.domain.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+
 import static com.softmedialtda.votingapp.util.Connection.*;
 import static com.softmedialtda.votingapp.util.Constants.*;
 import static com.softmedialtda.votingapp.util.Common.*;
@@ -27,10 +29,13 @@ public class LoginActivity extends Activity implements OnClickListener {
     EditText usernameEditText,passwordEditText;
     ProgressDialog progressDialog;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ImageView logo = (ImageView) findViewById(R.id.logoSoftmedia);
+        logo.setImageResource(R.drawable.softmedialogo);
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
     }

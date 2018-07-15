@@ -88,6 +88,9 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        context = this;
+        mContext = this;
         new HttpStadisticsAsyncTask().execute(url);
     }
 
@@ -122,8 +125,8 @@ public class StadisticActivity extends AppCompatActivity implements CandidateAda
     }
 
     @Override
-    public void onCandidateSelected(Candidate contact) {
-
+    public void onCandidateSelected(Candidate candidate) {
+        new AlertDialog.Builder(context).setMessage(candidate.getName()).setNeutralButton(R.string.ok,null).show();
     }
 
     private Chart getSameChart(Chart chart, String description, int textColor, int background, int animate, ArrayList<LegendEntry> entries){
