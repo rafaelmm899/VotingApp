@@ -15,11 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".login.activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".dashboard.activity.DashboardActivity" />
         <activity android:name=".voting.activity.VotingActivity">
@@ -30,7 +26,14 @@
         <activity android:name=".campaign.activity.CampaignActivity" />
         <activity android:name=".stadistic.activity.StadisticActivity" />
         <activity android:name=".voting.activity.ListVotingActivity" />
-        <activity android:name=".calendar.activity.CalendarActivity"></activity>
+        <activity android:name=".calendar.activity.CalendarActivity" />
+        <activity android:name=".splash.activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

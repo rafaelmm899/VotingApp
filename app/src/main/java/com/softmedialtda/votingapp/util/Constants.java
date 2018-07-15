@@ -20,4 +20,5 @@ public class Constants {
     public static final String youTubeUrlRegEx = "^(https?)?(://)?(www.)?(m.)?((youtube.com)|(youtu.be))/";
     public static final String[] videoIdRegex = { "\\?vi?=([^&]*)","watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)", "^([A-Za-z0-9\\-]*)"};
     public static final int[] COLORS = {Color.BLUE,Color.CYAN,Color.GREEN,Color.YELLOW,Color.RED};
+    public static final int SPLASH_TIME_OUT = 4000;
 }
