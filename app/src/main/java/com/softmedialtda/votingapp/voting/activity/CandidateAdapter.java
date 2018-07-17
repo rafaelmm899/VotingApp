@@ -76,8 +76,8 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.MyVi
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Candidate candidate = candidateListFiltered.get(position);
         holder.name.setText(candidate.getName());
-        holder.grade.setText(candidate.getGrade());
-        holder.group.setText(candidate.getGroup());
+        holder.grade.setText("Grado : "+candidate.getGrade());
+        holder.group.setText("Grupo : "+candidate.getGroup());
 
         if (candidate.gettVoto() != null){
             holder.tvoto.setText(candidate.gettVoto()+" Votos");
