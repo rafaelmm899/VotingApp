@@ -3,7 +3,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="activity_margin">12dp</dimen>
     <dimen name="thumbnail">100dp</dimen>
-    <dimen name="thumbnail_publication">40dp</dimen>
+    <dimen name="thumbnail_publication">60dp</dimen>
     <dimen name="row_padding">16dp</dimen>
     <dimen name="contact_name">15dp</dimen>
     <dimen name="contact_number">12dp</dimen>

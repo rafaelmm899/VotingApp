@@ -7,11 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.ViewGroup;
 
 import android.os.Bundle;
@@ -204,14 +209,18 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         if (candidate.getImage().equals("")){
             dialogImageView.setImageResource(R.mipmap.photodefault);
         }else{
-            try {
-                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(candidate.getImage()).getContent());
-                dialogImageView.setImageBitmap(bitmap);
-            }catch (MalformedURLException e){
-                e.printStackTrace();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+            byte[] decodedString = Base64.decode(candidate.getImage(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            Bitmap circleBitmap = Bitmap.createBitmap(decodedByte.getWidth(), decodedByte.getHeight(), Bitmap.Config.ARGB_8888);
+            BitmapShader shader = new BitmapShader(decodedByte,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            Paint paint = new Paint();
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+            Canvas c = new Canvas(circleBitmap);
+
+            c.drawCircle(decodedByte.getWidth()/2, decodedByte.getHeight()/2, decodedByte.getWidth()/2, paint);
+
+            dialogImageView.setImageBitmap(circleBitmap);
         }
 
         yesVote.setOnClickListener(new View.OnClickListener() {
