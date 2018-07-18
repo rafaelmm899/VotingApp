@@ -50,6 +50,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.softmedialtda.votingapp.util.Common.addBorderToCircularBitmap;
+import static com.softmedialtda.votingapp.util.Common.addShadowToCircularBitmap;
+import static com.softmedialtda.votingapp.util.Common.getCircularBitmap;
 import static com.softmedialtda.votingapp.util.Common.getListCandidate;
 import static com.softmedialtda.votingapp.util.Connection.sendPost;
 import static com.softmedialtda.votingapp.util.Constants.DOMAIN;
@@ -211,16 +214,12 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         }else{
             byte[] decodedString = Base64.decode(candidate.getImage(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            Bitmap circleBitmap = Bitmap.createBitmap(decodedByte.getWidth(), decodedByte.getHeight(), Bitmap.Config.ARGB_8888);
-            BitmapShader shader = new BitmapShader(decodedByte,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-            Paint paint = new Paint();
-            paint.setShader(shader);
-            paint.setAntiAlias(true);
-            Canvas c = new Canvas(circleBitmap);
 
-            c.drawCircle(decodedByte.getWidth()/2, decodedByte.getHeight()/2, decodedByte.getWidth()/2, paint);
+            decodedByte = getCircularBitmap(decodedByte);
+            decodedByte = addBorderToCircularBitmap(decodedByte, 15, Color.WHITE);
+            decodedByte = addShadowToCircularBitmap(decodedByte, 4, Color.LTGRAY);
 
-            dialogImageView.setImageBitmap(circleBitmap);
+            dialogImageView.setImageBitmap(decodedByte);
         }
 
         yesVote.setOnClickListener(new View.OnClickListener() {

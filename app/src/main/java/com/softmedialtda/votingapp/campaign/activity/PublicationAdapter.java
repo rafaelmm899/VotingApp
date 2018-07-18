@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.media.MediaPlayer;
@@ -42,7 +43,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.softmedialtda.votingapp.util.Common.addBorderToCircularBitmap;
+import static com.softmedialtda.votingapp.util.Common.addShadowToCircularBitmap;
 import static com.softmedialtda.votingapp.util.Common.extractVideoIdFromUrl;
+import static com.softmedialtda.votingapp.util.Common.getCircularBitmap;
 import static com.softmedialtda.votingapp.util.Constants.YOUTUBEKEY;
 
 
@@ -101,19 +105,12 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         }else{
             byte[] decodedString = Base64.decode(publication.getImageStudent(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            Bitmap circleBitmap = Bitmap.createBitmap(decodedByte.getWidth(), decodedByte.getHeight(), Bitmap.Config.ARGB_8888);
-            BitmapShader shader = new BitmapShader(decodedByte,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-            Paint paint = new Paint();
-            paint.setShader(shader);
-            paint.setAntiAlias(true);
-            Canvas c = new Canvas(circleBitmap);
 
-            float width = decodedByte.getWidth()/2; //60
-            float height = decodedByte.getHeight()/2; //80
+            decodedByte = getCircularBitmap(decodedByte);
+            decodedByte = addBorderToCircularBitmap(decodedByte, 15, Color.WHITE);
+            decodedByte = addShadowToCircularBitmap(decodedByte, 4, Color.LTGRAY);
 
-            c.drawCircle(decodedByte.getWidth()/2, decodedByte.getHeight()/2, decodedByte.getWidth()/2, paint);
-
-            holder.photoCandidate.setImageBitmap(circleBitmap);
+            holder.photoCandidate.setImageBitmap(decodedByte);
         }
 
         if (!publication.getLink().equals("")&&publication.getLink() != null&&!publication.getLink().equals("null")) {

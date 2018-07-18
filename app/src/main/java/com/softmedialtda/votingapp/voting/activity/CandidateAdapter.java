@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.attr.bitmap;
+import static com.softmedialtda.votingapp.util.Common.addBorderToCircularBitmap;
+import static com.softmedialtda.votingapp.util.Common.addShadowToCircularBitmap;
+import static com.softmedialtda.votingapp.util.Common.getCircularBitmap;
 
 /**
  * Created by Agustin on 25/6/2018.
@@ -98,7 +102,9 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.MyVi
 
             byte[] decodedString = Base64.decode(candidate.getImage(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            Bitmap circleBitmap = Bitmap.createBitmap(decodedByte.getWidth(), decodedByte.getHeight(), Bitmap.Config.ARGB_8888);
+
+
+            /*Bitmap circleBitmap = Bitmap.createBitmap(decodedByte.getWidth(), decodedByte.getHeight(), Bitmap.Config.ARGB_8888);
             BitmapShader shader = new BitmapShader(decodedByte,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             Paint paint = new Paint();
             paint.setShader(shader);
@@ -108,9 +114,18 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.MyVi
             float width = decodedByte.getWidth()/2; //60
             float height = decodedByte.getHeight()/2; //80
 
-            c.drawCircle(decodedByte.getWidth()/2, decodedByte.getHeight()/2, decodedByte.getWidth()/2, paint);
+            c.drawCircle(decodedByte.getWidth()/2, decodedByte.getWidth()/2, decodedByte.getWidth()/2, paint);*/
 
-            holder.thumbnail.setImageBitmap(circleBitmap);
+            // Create a circular bitmap
+            decodedByte = getCircularBitmap(decodedByte);
+
+            // Add a border around circular bitmap
+            decodedByte = addBorderToCircularBitmap(decodedByte, 15, Color.WHITE);
+
+            // Add a shadow around circular bitmap
+            decodedByte = addShadowToCircularBitmap(decodedByte, 4, Color.LTGRAY);
+
+            holder.thumbnail.setImageBitmap(decodedByte);
 
         }
 
