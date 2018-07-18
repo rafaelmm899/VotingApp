@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color> -->
 
-    <color name="colorPrimary">#FFC107</color>
-    <color name="colorPrimaryDark">#FFA000</color>
+    <color name="colorPrimary">#537895</color>
+    <color name="colorPrimaryDark">#537895</color>
     <color name="backgroundcolor">#f1f1f1</color>
     <color name="lightgray">#ededed</color>
     <color name="deeppurple">#7c4dff</color>
@@ -30,4 +30,7 @@
     <color name="light_grey">#cccccc</color>
     <color name="row_activated">#e0e0e0</color>
     <color name="grey_600">#757575</color>
+    <color name="font_color">#e0e0e0</color>
+
+
 </resources>

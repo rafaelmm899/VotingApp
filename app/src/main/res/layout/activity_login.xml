@@ -17,10 +17,20 @@
             android:id="@+id/logoSoftmedia"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginTop="30dp"
             android:layout_weight="1"
+            android:layout_marginTop="10dp"
             android:visibility="visible"
-            app:srcCompat="@drawable/softmedialogo" />
+            app:srcCompat="@drawable/votar" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tittle_login"
+            android:fontFamily="cursive"
+            android:textAlignment="center"
+            android:textColor="@color/font_color"
+            android:textSize="40dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 
@@ -34,6 +44,8 @@
         android:maxLines="1"
         android:textSize="13sp"
         android:hint="@string/username_loginactivity"
+        android:textColorHint="@color/font_color"
+        android:textColor="@color/font_color"
         />
 
     <EditText
@@ -46,6 +58,8 @@
         android:layout_width="match_parent"
         android:hint="@string/password_loginactivity"
         android:inputType="textPassword"
+        android:textColorHint="@color/font_color"
+        android:textColor="@color/font_color"
         />
 
     <Button
@@ -59,7 +73,9 @@
         android:textAllCaps="false"
         android:onClick="onClick"
         android:background="@drawable/button_login"
-        android:text="@string/textButton_loginactivity"/>
+        android:text="@string/textButton_loginactivity"
+        android:textColorHint="@color/font_color"
+        android:textColor="@color/font_color"/>
 
 
 

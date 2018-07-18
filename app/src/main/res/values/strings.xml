@@ -13,6 +13,7 @@
     <string name="Authenticating">Autenticando</string>
     <string name="logout">Cerrar Sesion</string>
     <string name="logout_confirm">Seguro desea salir?</string>
+    <string name="tittle_login">Elecciones Escolares</string>
 
     <!-- activity_dashboard view -->
     <string name="voting_textview">Votaciones</string>

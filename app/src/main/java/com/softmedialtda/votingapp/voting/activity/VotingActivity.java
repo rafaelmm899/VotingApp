@@ -1,9 +1,12 @@
 package com.softmedialtda.votingapp.voting.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,6 +23,8 @@ import android.view.View;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +39,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static com.softmedialtda.votingapp.util.Common.getListCandidate;
@@ -67,8 +76,6 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         ViewGroup.MarginLayoutParams marginLayoutParams =
@@ -79,10 +86,8 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-
+        
         user = (User) getIntent().getSerializableExtra("user");
         voting = (Voting) getIntent().getSerializableExtra("voting");
         context = this;
@@ -183,7 +188,49 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
     }
 
     private void confirmDialog(final Candidate candidate){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        final Dialog MyDialog = new Dialog(context);
+
+        MyDialog.setContentView(R.layout.vote_dialog_alert);
+        MyDialog.setTitle("My Custom Dialog");
+
+        ImageView dialogImageView = (ImageView) MyDialog.findViewById(R.id.dialogImageView);
+        Button yesVote = (Button)MyDialog.findViewById(R.id.yesVote);
+        Button noVote = (Button)MyDialog.findViewById(R.id.noVote);
+
+        yesVote.setEnabled(true);
+        noVote.setEnabled(true);
+
+        if (candidate.getImage().equals("")){
+            dialogImageView.setImageResource(R.mipmap.photodefault);
+        }else{
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(candidate.getImage()).getContent());
+                dialogImageView.setImageBitmap(bitmap);
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        yesVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new HttpVoteAsyncTask().execute(String.valueOf(candidate.getId()));
+            }
+        });
+        noVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDialog.cancel();
+            }
+        });
+
+        MyDialog.show();
+
+
+        /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.questionVote).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -194,7 +241,7 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
-        }).show();
+        }).show();*/
     }
 
     private class HttpVoteAsyncTask extends AsyncTask<String, Void, String> {
@@ -237,11 +284,11 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
 
     @Override
     public void onCandidateSelected(Candidate candidate){
-        if (voting.getUserVoted() == 1){
+        /*if (voting.getUserVoted() == 1){
             new AlertDialog.Builder(context).setTitle(R.string.userHasAlreadyVoted).setNeutralButton(R.string.ok,null).show();
-        }else{
+        }else{*/
             confirmDialog(candidate);
-        }
+        //}
     }
 
 }

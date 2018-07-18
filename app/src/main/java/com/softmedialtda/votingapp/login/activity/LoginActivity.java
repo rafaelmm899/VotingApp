@@ -35,7 +35,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ImageView logo = (ImageView) findViewById(R.id.logoSoftmedia);
-        logo.setImageResource(R.drawable.softmedialogo);
+        logo.setImageResource(R.drawable.votar);
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
     }

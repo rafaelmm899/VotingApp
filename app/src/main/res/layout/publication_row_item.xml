@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/photoCandidate"
-            android:layout_width="@dimen/thumbnail"
-            android:layout_height="@dimen/thumbnail"
+            android:layout_width="@dimen/thumbnail_publication"
+            android:layout_height="@dimen/thumbnail_publication"
             android:layout_centerVertical="false"
             android:layout_marginRight="@dimen/row_padding"
             />
