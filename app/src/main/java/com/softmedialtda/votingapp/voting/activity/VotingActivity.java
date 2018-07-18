@@ -200,8 +200,6 @@ public class VotingActivity extends AppCompatActivity implements CandidateAdapte
         final Dialog MyDialog = new Dialog(context);
 
         MyDialog.setContentView(R.layout.vote_dialog_alert);
-        MyDialog.setTitle("My Custom Dialog");
-
         ImageView dialogImageView = (ImageView) MyDialog.findViewById(R.id.dialogImageView);
         Button yesVote = (Button)MyDialog.findViewById(R.id.yesVote);
         Button noVote = (Button)MyDialog.findViewById(R.id.noVote);
